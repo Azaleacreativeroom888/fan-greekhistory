@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>Gallery | アルカディアの空</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#2E7BA6;
+    --sky-mid:#5FB8E0;
+    --sky-low:#A8DCEF;
+    --cloud:#FDFCF7;
+    --marble:#F3EFE4;
+    --marble-dark:#E4DCC8;
+    --gold:#C9A24B;
+    --terracotta:#B0603D;
+    --ink:#1C3A4A;
+    --ink-soft:#3E5B6B;
+    --vase:#A8431F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Serif JP', serif;
+    color:var(--ink);
+    background:var(--marble);
+    line-height:1.9;
+  }
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond','Noto Serif JP',serif;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;}
+
+  /* ===== HEADER / NAV ===== */
+  header.site-header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 6vw;
+    background:linear-gradient(to bottom, rgba(28,58,74,0.55), transparent);
+  }
+  .brand{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.5rem; color:var(--cloud); letter-spacing:0.12em;
+    text-decoration:none; display:flex; align-items:baseline; gap:8px;
+  }
+  .brand small{
+    font-family:'Noto Serif JP', serif;
+    font-size:0.62rem; color:var(--marble-dark); letter-spacing:0.2em;
+  }
+  nav.site-nav ul{ list-style:none; display:flex; gap:2.4rem; }
+  nav.site-nav a{
+    text-decoration:none; color:var(--cloud);
+    font-size:0.92rem; letter-spacing:0.08em;
+    position:relative; padding-bottom:4px;
+  }
+  nav.site-nav a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0;
+    height:1px; background:var(--gold);
+    transform:scaleX(0); transform-origin:left; transition:transform 0.3s ease;
+  }
+  nav.site-nav a:hover::after{transform:scaleX(1);}
+  nav.site-nav a.current::after{transform:scaleX(1);}
+
+  /* ===== PAGE HERO ===== */
+  .page-hero{
+    position:relative; height:46vh; min-height:320px;
+    background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 60%, var(--sky-low) 100%);
+    overflow:hidden;
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .page-hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 50% 30%, rgba(255,255,255,0.3), transparent);
+    opacity:0.8;
+  }
+  .page-hero .cloud-layer{
+    position:absolute; left:-10%; width:120%; bottom:-6%;
+    animation:drift 50s linear infinite;
+  }
+  .page-hero .cloud-layer svg{width:100%; display:block;}
+  @keyframes drift{ from{transform:translateX(0);} to{transform:translateX(-10%);} }
+  .page-hero-copy{ position:relative; z-index:3; text-align:center; color:var(--cloud); padding-bottom:3.4rem; }
+  .page-hero-copy .eyebrow{
+    display:block; font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:0.6rem;
+  }
+  .page-hero-copy h1{
+    font-size:clamp(2rem,4.4vw,3.2rem); color:var(--cloud);
+    text-shadow:0 4px 20px rgba(15,35,48,0.4);
+  }
+
+  /* ===== 柱の区切り ===== */
+  .column-divider{
+    display:flex; justify-content:center; align-items:flex-end;
+    gap:clamp(10px,3vw,26px);
+    padding:2.2rem 6vw 1rem;
+    background:var(--marble);
+  }
+  .column-divider svg{ height:40px; opacity:0.5; }
+
+  /* ===== GALLERY INTRO ===== */
+  .gallery-intro{
+    text-align:center;
+    max-width:38em;
+    margin:0 auto 3rem;
+    padding:0 6vw;
+  }
+  .gallery-intro .label{
+    font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--terracotta); margin-bottom:0.7rem;
+  }
+  .gallery-intro p{ color:var(--ink-soft); font-size:0.95rem; }
+
+  /* ===== FILTER TABS ===== */
+  .filter-tabs{
+    display:flex; justify-content:center; flex-wrap:wrap;
+    gap:0.6rem;
+    padding:0 6vw 3rem;
+  }
+  .filter-tabs button{
+    font-family:'Noto Serif JP', serif;
+    font-size:0.82rem;
+    letter-spacing:0.05em;
+    padding:0.5rem 1.2rem;
+    border:1px solid var(--marble-dark);
+    background:var(--cloud);
+    color:var(--ink-soft);
+    border-radius:999px;
+    cursor:pointer;
+    transition:all 0.25s ease;
+  }
+  .filter-tabs button:hover{ border-color:var(--gold); color:var(--ink); }
+  .filter-tabs button.active{
+    background:var(--ink);
+    color:var(--cloud);
+    border-color:var(--ink);
+  }
+
+  /* ===== GALLERY GRID ===== */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.6rem;
+    padding:0 6vw 6rem;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  .g-card{
+    background:var(--cloud);
+    border:1px solid var(--marble-dark);
+    overflow:hidden;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .g-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(28,58,74,0.14);
+  }
+  .g-frame{
+    position:relative;
+    aspect-ratio:4/3;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .g-frame svg{ width:70%; height:70%; }
+  .g-caption{ padding:1.2rem 1.3rem 1.5rem; }
+  .g-caption .cat{
+    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:0.4rem;
+  }
+  .g-caption h3{ font-size:1.2rem; color:var(--ink); margin-bottom:0.4rem; }
+  .g-caption p{ font-size:0.84rem; color:var(--ink-soft); }
+
+  /* 背景バリエーション */
+  .bg-sky{ background:linear-gradient(160deg, var(--sky-mid), var(--sky-low)); }
+  .bg-marble{ background:linear-gradient(160deg, var(--marble), var(--marble-dark)); }
+  .bg-vase{ background:linear-gradient(160deg, #E7D9BE, #D9C7A3); }
+  .bg-ink{ background:linear-gradient(160deg, #2C4C5C, var(--ink)); }
+
+  /* ===== フッター ===== */
+  footer{
+    background:var(--ink); color:var(--marble-dark);
+    padding:3.2rem 6vw 2.2rem; font-size:0.8rem;
+  }
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:1.6rem;
+    padding-bottom:2rem;
+    border-bottom:1px solid rgba(243,239,228,0.15);
+    margin-bottom:1.6rem;
+  }
+  footer .brand{ color:var(--cloud); font-size:1.2rem; }
+  footer .foot-links{ display:flex; gap:1.6rem; }
+  footer .foot-links a{ text-decoration:none; color:var(--marble-dark); }
+  footer .foot-links a:hover{ color:var(--gold); }
+  footer .ai-notice{ font-size:0.72rem; color:#8FA3AD; line-height:1.7; max-width:60em; }
+  footer .copyright{ margin-top:1rem; font-size:0.72rem; color:#8FA3AD; }
+
+  @media (max-width:880px){
+    nav.site-nav{ display:none; }
+    .gallery-grid{ grid-template-columns:1fr; }
+  }
+  @media (min-width:881px) and (max-width:1180px){
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .page-hero .cloud-layer{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">ARCADIA SKY <small>古代ギリシャ史ノート</small></a>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html" class="current">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="cloud-layer">
+    <svg viewBox="0 0 1600 220" preserveAspectRatio="none">
+      <path fill="#FDFCF7" d="M0,170 Q80,120 180,150 Q230,100 320,130 Q390,90 470,125 Q550,95 630,135 Q710,100 800,140 Q880,105 970,140 Q1050,105 1140,140 Q1220,110 1300,145 Q1390,115 1470,150 Q1540,130 1600,150 L1600,220 L0,220 Z"/>
+    </svg>
+  </div>
+  <div class="page-hero-copy">
+    <span class="eyebrow">Visual Records</span>
+    <h1>Gallery</h1>
+  </div>
+</section>
+
+<div class="column-divider">
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+</div>
+
+<div class="gallery-intro">
+  <div class="label">A visual record</div>
+  <p>遺跡、壺絵、彫刻——古代ギリシャの視覚世界をめぐる記録です。写真は順次追加していきます。</p>
+</div>
+
+<div class="filter-tabs">
+  <button class="active" data-filter="all">すべて</button>
+  <button data-filter="architecture">建築</button>
+  <button data-filter="pottery">壺絵</button>
+  <button data-filter="sculpture">彫刻</button>
+</div>
+
+<div class="gallery-grid">
+
+  <div class="g-card" data-cat="architecture">
+    <div class="g-frame bg-sky">
+      <svg viewBox="0 0 200 140">
+        <rect x="20" y="100" width="160" height="8" fill="#FDFCF7"/>
+        <rect x="30" y="45" width="6" height="55" fill="#FDFCF7"/>
+        <rect x="52" y="45" width="6" height="55" fill="#FDFCF7"/>
+        <rect x="74" y="45" width="6" height="55" fill="#FDFCF7"/>
+        <rect x="96" y="45" width="6" height="55" fill="#FDFCF7"/>
+        <rect x="118" y="45" width="6" height="55" fill="#FDFCF7"/>
+        <rect x="140" y="45" width="6" height="55" fill="#FDFCF7"/>
+        <rect x="162" y="45" width="6" height="55" fill="#FDFCF7"/>
+        <rect x="24" y="38" width="150" height="7" fill="#FDFCF7"/>
+        <polygon points="100,10 20,38 180,38" fill="#F3EFE4"/>
+      </svg>
+    </div>
+    <div class="g-caption">
+      <div class="cat">Architecture</div>
+      <h3>パルテノン神殿</h3>
+      <p>アテナイのアクロポリスに立つドリス式神殿。前447年に着工。</p>
+    </div>
+  </div>
+
+  <div class="g-card" data-cat="pottery">
+    <div class="g-frame bg-vase">
+      <svg viewBox="0 0 200 140">
+        <path d="M90,20 Q75,20 75,35 L75,45 Q60,55 60,80 Q60,110 100,115 Q140,110 140,80 Q140,55 125,45 L125,35 Q125,20 110,20 Z" fill="#A8431F"/>
+        <rect x="75" y="18" width="50" height="8" fill="#A8431F"/>
+        <path d="M75,70 Q100,60 125,70 L125,90 Q100,100 75,90 Z" fill="#E7D9BE" opacity="0.85"/>
+      </svg>
+    </div>
+    <div class="g-caption">
+      <div class="cat">Pottery</div>
+      <h3>黒絵式アンフォラ</h3>
+      <p>幾何学文様とパルメット装飾を組み合わせた典型的な形式。</p>
+    </div>
+  </div>
+
+  <div class="g-card" data-cat="sculpture">
+    <div class="g-frame bg-marble">
+      <svg viewBox="0 0 200 140">
+        <ellipse cx="100" cy="35" rx="16" ry="18" fill="#E4DCC8"/>
+        <path d="M75,55 Q100,45 125,55 L130,120 Q100,130 70,120 Z" fill="#F3EFE4"/>
+        <line x1="82" y1="70" x2="82" y2="115" stroke="#E4DCC8" stroke-width="2"/>
+        <line x1="100" y1="65" x2="100" y2="118" stroke="#E4DCC8" stroke-width="2"/>
+        <line x1="118" y1="70" x2="118" y2="115" stroke="#E4DCC8" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="g-caption">
+      <div class="cat">Sculpture</div>
+      <h3>コレー像</h3>
+      <p>アルカイック期に多く作られた、正装した若い女性の奉納像。</p>
+    </div>
+  </div>
+
+  <div class="g-card" data-cat="architecture">
+    <div class="g-frame bg-ink">
+      <svg viewBox="0 0 200 140">
+        <path d="M30,120 Q30,50 100,40 Q170,50 170,120 Z" fill="none" stroke="#C9A24B" stroke-width="2"/>
+        <line x1="45" y1="110" x2="45" y2="60" stroke="#FDFCF7" stroke-width="4"/>
+        <line x1="70" y1="110" x2="70" y2="52" stroke="#FDFCF7" stroke-width="4"/>
+        <line x1="130" y1="110" x2="130" y2="52" stroke="#FDFCF7" stroke-width="4"/>
+        <line x1="155" y1="110" x2="155" y2="60" stroke="#FDFCF7" stroke-width="4"/>
+      </svg>
+    </div>
+    <div class="g-caption">
+      <div class="cat">Architecture</div>
+      <h3>エピダウロスの劇場</h3>
+      <p>優れた音響設計で知られる、古代ギリシャ最大級の野外劇場。</p>
+    </div>
+  </div>
+
+  <div class="g-card" data-cat="pottery">
+    <div class="g-frame bg-sky">
+      <svg viewBox="0 0 200 140">
+        <ellipse cx="100" cy="70" rx="55" ry="32" fill="#FDFCF7"/>
+        <ellipse cx="100" cy="70" rx="55" ry="32" fill="none" stroke="#A8431F" stroke-width="3"/>
+        <line x1="45" y1="70" x2="155" y2="70" stroke="#A8431F" stroke-width="2"/>
+        <circle cx="100" cy="55" r="8" fill="#A8431F" opacity="0.85"/>
+      </svg>
+    </div>
+    <div class="g-caption">
+      <div class="cat">Pottery</div>
+      <h3>赤絵式キュリクス</h3>
+      <p>浅く広い酒杯。内側の円形画面（トンド）に人物が描かれることが多い。</p>
+    </div>
+  </div>
+
+  <div class="g-card" data-cat="sculpture">
+    <div class="g-frame bg-marble">
+      <svg viewBox="0 0 200 140">
+        <ellipse cx="100" cy="32" rx="15" ry="17" fill="#E4DCC8"/>
+        <path d="M70,60 Q100,48 130,60 L124,120 L76,120 Z" fill="#F3EFE4"/>
+        <path d="M85,60 L80,120" stroke="#E4DCC8" stroke-width="2"/>
+        <path d="M115,60 L120,120" stroke="#E4DCC8" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="g-caption">
+      <div class="cat">Sculpture</div>
+      <h3>クーロス像</h3>
+      <p>直立し、片足を前に出した姿勢が特徴の、若い男性の理想化された像。</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="brand">ARCADIA SKY</a>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="ai-notice">本サイトのすべてのテキストおよび画像は、AIモデルの学習目的での使用・収集・複製を禁じます。No content on this site may be used for AI training purposes.</p>
+  <p class="copyright">© Arcadia Sky — Notes on Ancient Hellas</p>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-tabs button');
+  const cards = document.querySelectorAll('.g-card');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
