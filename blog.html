@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>Blog | アルカディアの空</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#2E7BA6;
+    --sky-mid:#5FB8E0;
+    --sky-low:#A8DCEF;
+    --cloud:#FDFCF7;
+    --marble:#F3EFE4;
+    --marble-dark:#E4DCC8;
+    --gold:#C9A24B;
+    --terracotta:#B0603D;
+    --ink:#1C3A4A;
+    --ink-soft:#3E5B6B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Serif JP', serif;
+    color:var(--ink);
+    background:var(--marble);
+    line-height:1.9;
+  }
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond','Noto Serif JP',serif;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;}
+
+  /* ===== HEADER / NAV ===== */
+  header.site-header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 6vw;
+    background:linear-gradient(to bottom, rgba(28,58,74,0.55), transparent);
+  }
+  .brand{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.5rem;
+    color:var(--cloud);
+    letter-spacing:0.12em;
+    text-decoration:none;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .brand small{
+    font-family:'Noto Serif JP', serif;
+    font-size:0.62rem;
+    color:var(--marble-dark);
+    letter-spacing:0.2em;
+  }
+  nav.site-nav ul{ list-style:none; display:flex; gap:2.4rem; }
+  nav.site-nav a{
+    text-decoration:none; color:var(--cloud);
+    font-size:0.92rem; letter-spacing:0.08em;
+    position:relative; padding-bottom:4px;
+  }
+  nav.site-nav a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0;
+    height:1px; background:var(--gold);
+    transform:scaleX(0); transform-origin:left; transition:transform 0.3s ease;
+  }
+  nav.site-nav a:hover::after{transform:scaleX(1);}
+  nav.site-nav a.current::after{transform:scaleX(1);}
+
+  /* ===== PAGE HERO (小型の空バナー) ===== */
+  .page-hero{
+    position:relative;
+    height:46vh;
+    min-height:320px;
+    background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 60%, var(--sky-low) 100%);
+    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+  }
+  .page-hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 50% 30%, rgba(255,255,255,0.3), transparent);
+    opacity:0.8;
+  }
+  .page-hero .cloud-layer{
+    position:absolute; left:-10%; width:120%; bottom:-6%;
+    animation:drift 50s linear infinite;
+  }
+  .page-hero .cloud-layer svg{width:100%; display:block;}
+  @keyframes drift{ from{transform:translateX(0);} to{transform:translateX(-10%);} }
+  .page-hero-copy{
+    position:relative; z-index:3;
+    text-align:center;
+    color:var(--cloud);
+    padding-bottom:3.4rem;
+  }
+  .page-hero-copy .eyebrow{
+    display:block;
+    font-size:0.75rem;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:0.6rem;
+  }
+  .page-hero-copy h1{
+    font-size:clamp(2rem,4.4vw,3.2rem);
+    color:var(--cloud);
+    text-shadow:0 4px 20px rgba(15,35,48,0.4);
+  }
+
+  /* ===== 柱の区切り ===== */
+  .column-divider{
+    display:flex; justify-content:center; align-items:flex-end;
+    gap:clamp(10px,3vw,26px);
+    padding:2.2rem 6vw 1rem;
+    background:var(--marble);
+  }
+  .column-divider svg{ height:40px; opacity:0.5; }
+
+  /* ===== BLOG LIST ===== */
+  .blog-wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:1rem 6vw 6rem;
+  }
+  .blog-intro{
+    text-align:center;
+    margin-bottom:3.2rem;
+  }
+  .blog-intro .label{
+    font-size:0.75rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:0.7rem;
+  }
+  .blog-intro p{
+    color:var(--ink-soft);
+    max-width:38em;
+    margin:0.8rem auto 0;
+    font-size:0.95rem;
+  }
+
+  .entry-list{
+    position:relative;
+    border-left:1px solid var(--marble-dark);
+    padding-left:2.2rem;
+  }
+  .entry{
+    position:relative;
+    padding-bottom:3rem;
+  }
+  .entry:last-child{ padding-bottom:0; }
+  .entry::before{
+    content:"";
+    position:absolute;
+    left:-2.55rem;
+    top:0.35rem;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 0 4px var(--marble), 0 0 0 5px var(--marble-dark);
+  }
+  .entry time{
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-size:1rem;
+    letter-spacing:0.1em;
+    color:var(--terracotta);
+    margin-bottom:0.5rem;
+  }
+  .entry h2{
+    font-size:1.5rem;
+    color:var(--ink);
+    margin-bottom:0.7rem;
+  }
+  .entry p{
+    color:var(--ink-soft);
+    font-size:0.96rem;
+  }
+
+  /* ===== フッター ===== */
+  footer{
+    background:var(--ink);
+    color:var(--marble-dark);
+    padding:3.2rem 6vw 2.2rem;
+    font-size:0.8rem;
+  }
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:1.6rem;
+    padding-bottom:2rem;
+    border-bottom:1px solid rgba(243,239,228,0.15);
+    margin-bottom:1.6rem;
+  }
+  footer .brand{ color:var(--cloud); font-size:1.2rem; }
+  footer .foot-links{ display:flex; gap:1.6rem; }
+  footer .foot-links a{ text-decoration:none; color:var(--marble-dark); }
+  footer .foot-links a:hover{ color:var(--gold); }
+  footer .ai-notice{ font-size:0.72rem; color:#8FA3AD; line-height:1.7; max-width:60em; }
+  footer .copyright{ margin-top:1rem; font-size:0.72rem; color:#8FA3AD; }
+
+  @media (max-width:880px){
+    nav.site-nav{ display:none; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .page-hero .cloud-layer{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">ARCADIA SKY <small>古代ギリシャ史ノート</small></a>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="blog.html" class="current">BLOG</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="cloud-layer">
+    <svg viewBox="0 0 1600 220" preserveAspectRatio="none">
+      <path fill="#FDFCF7" d="M0,170 Q80,120 180,150 Q230,100 320,130 Q390,90 470,125 Q550,95 630,135 Q710,100 800,140 Q880,105 970,140 Q1050,105 1140,140 Q1220,110 1300,145 Q1390,115 1470,150 Q1540,130 1600,150 L1600,220 L0,220 Z"/>
+    </svg>
+  </div>
+  <div class="page-hero-copy">
+    <span class="eyebrow">Diary</span>
+    <h1>Blog</h1>
+  </div>
+</section>
+
+<div class="column-divider">
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+</div>
+
+<div class="blog-wrap">
+  <div class="blog-intro">
+    <div class="label">Notes, dated</div>
+    <p>学びの記録を、日付順に並べています。読んだこと、考えたこと、気づいたことの断片。</p>
+  </div>
+
+  <div class="entry-list">
+
+    <div class="entry">
+      <time datetime="2026-08-10">2026.08.10</time>
+      <h2>神殿の色について</h2>
+      <p>古代ギリシャの神殿は白い大理石のイメージが強いけれど、実際には彩色されていたという説を読んだ。青や赤、金で塗られたパルテノン神殿を想像すると、印象がずいぶん変わる。今の「白いギリシャ」像は、後世が作った理想なのかもしれない。</p>
+    </div>
+
+    <div class="entry">
+      <time datetime="2026-08-03">2026.08.03</time>
+      <h2>ポリスという単位</h2>
+      <p>ポリスは単なる「都市」ではなく、市民が政治に参加する共同体そのものだったという話が興味深かった。アテナイとスパルタを比べると、同じポリスでもこれほど違う社会が生まれるのかと驚く。</p>
+    </div>
+
+    <div class="entry">
+      <time datetime="2026-07-27">2026.07.27</time>
+      <h2>ホメロスをどう読むか</h2>
+      <p>『イリアス』は史実というより記憶の集積らしい。トロイア戦争そのものより、それがどう語り継がれ、ギリシャ人の自己認識を形作っていったかの方が面白く感じる。</p>
+    </div>
+
+    <div class="entry">
+      <time datetime="2026-07-19">2026.07.19</time>
+      <h2>デルフォイの神託</h2>
+      <p>「汝自身を知れ」という言葉が神殿の入口に刻まれていたと知って、少し立ち止まった。神託を求めて多くの人が旅をした場所に、自己認識についての言葉があるのは示唆的だ。</p>
+    </div>
+
+    <div class="entry">
+      <time datetime="2026-07-11">2026.07.11</time>
+      <h2>始めます</h2>
+      <p>古代ギリシャ史を体系的に学び直すことにした。まずはミケーネ文明から暗黒時代、そしてポリスの成立まで。少しずつ、ここに記録していきたい。</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="brand">ARCADIA SKY</a>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="ai-notice">本サイトのすべてのテキストおよび画像は、AIモデルの学習目的での使用・収集・複製を禁じます。No content on this site may be used for AI training purposes.</p>
+  <p class="copyright">© Arcadia Sky — Notes on Ancient Hellas</p>
+</footer>
+
+</body>
+</html>
