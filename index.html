@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>アルカディアの空 | 古代ギリシャ史ノート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#2E7BA6;
+    --sky-mid:#5FB8E0;
+    --sky-low:#A8DCEF;
+    --cloud:#FDFCF7;
+    --marble:#F3EFE4;
+    --marble-dark:#E4DCC8;
+    --gold:#C9A24B;
+    --terracotta:#B0603D;
+    --ink:#1C3A4A;
+    --ink-soft:#3E5B6B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Serif JP', serif;
+    color:var(--ink);
+    background:var(--marble);
+    line-height:1.9;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond','Noto Serif JP',serif;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+
+  a{color:inherit;}
+
+  /* ===== HEADER / NAV ===== */
+  header.site-header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 6vw;
+    background:linear-gradient(to bottom, rgba(28,58,74,0.55), transparent);
+    transition:background 0.3s ease;
+  }
+  .brand{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.5rem;
+    color:var(--cloud);
+    letter-spacing:0.12em;
+    text-decoration:none;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .brand small{
+    font-family:'Noto Serif JP', serif;
+    font-size:0.62rem;
+    color:var(--marble-dark);
+    letter-spacing:0.2em;
+  }
+  nav.site-nav ul{
+    list-style:none;
+    display:flex;
+    gap:2.4rem;
+  }
+  nav.site-nav a{
+    text-decoration:none;
+    color:var(--cloud);
+    font-size:0.92rem;
+    letter-spacing:0.08em;
+    position:relative;
+    padding-bottom:4px;
+  }
+  nav.site-nav a::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:1px;
+    background:var(--gold);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.3s ease;
+  }
+  nav.site-nav a:hover::after{transform:scaleX(1);}
+  nav.site-nav a.current::after{transform:scaleX(1);}
+
+  /* ===== HERO : 空に浮かぶ神殿 ===== */
+  .hero{
+    position:relative;
+    height:100vh;
+    min-height:640px;
+    background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, var(--sky-low) 100%);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* 光の粒（星のような輝き） */
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(2px 2px at 20% 18%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1.5px 1.5px at 75% 12%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 60% 25%, rgba(255,255,255,0.35), transparent),
+      radial-gradient(1.5px 1.5px at 40% 8%, rgba(255,255,255,0.45), transparent);
+    opacity:0.8;
+  }
+
+  .cloud-layer{
+    position:absolute;
+    left:-10%;
+    width:120%;
+    pointer-events:none;
+  }
+  .cloud-layer svg{width:100%; display:block;}
+  .cloud-back{ bottom:6%; opacity:0.55; animation:driftSlow 90s linear infinite; }
+  .cloud-mid{ bottom:0%; opacity:0.85; animation:driftMid 60s linear infinite; }
+  .cloud-front{ bottom:-4%; opacity:1; animation:driftFast 42s linear infinite; z-index:5; }
+
+  @keyframes driftSlow{ from{transform:translateX(0);} to{transform:translateX(-8%);} }
+  @keyframes driftMid{ from{transform:translateX(0);} to{transform:translateX(10%);} }
+  @keyframes driftFast{ from{transform:translateX(0);} to{transform:translateX(-12%);} }
+
+  /* 神殿本体 */
+  .temple-wrap{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    animation:floatTemple 7s ease-in-out infinite;
+  }
+  @keyframes floatTemple{
+    0%,100%{ transform:translateY(0px); }
+    50%{ transform:translateY(-14px); }
+  }
+  .temple-wrap svg{
+    width:min(78vw, 620px);
+    height:auto;
+    filter:drop-shadow(0 30px 40px rgba(20,40,55,0.35));
+  }
+
+  .hero-copy{
+    position:absolute;
+    z-index:6;
+    bottom:9%;
+    left:0; right:0;
+    text-align:center;
+    color:var(--cloud);
+    padding:0 6vw;
+  }
+  .hero-copy .eyebrow{
+    display:inline-block;
+    font-size:0.78rem;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:0.9rem;
+  }
+  .hero-copy h1{
+    font-size:clamp(2.2rem, 5.2vw, 4rem);
+    color:var(--cloud);
+    text-shadow:0 4px 24px rgba(15,35,48,0.4);
+  }
+  .hero-copy p{
+    margin-top:0.9rem;
+    font-size:1.02rem;
+    color:var(--marble);
+    max-width:34em;
+    margin-left:auto;
+    margin-right:auto;
+    font-weight:300;
+  }
+
+  .scroll-hint{
+    position:absolute;
+    bottom:2.4rem; left:50%;
+    transform:translateX(-50%);
+    z-index:6;
+    color:var(--marble);
+    font-size:0.7rem;
+    letter-spacing:0.3em;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    opacity:0.85;
+  }
+  .scroll-hint .line{
+    width:1px; height:34px;
+    background:linear-gradient(to bottom, var(--gold), transparent);
+    animation:scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine{ 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+
+  /* ===== ドリス式の柱の区切り ===== */
+  .column-divider{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:clamp(10px,3vw,26px);
+    padding:2.4rem 6vw 1.2rem;
+    background:var(--marble);
+  }
+  .column-divider svg{ height:46px; opacity:0.55; }
+
+  /* ===== イントロ ===== */
+  .intro{
+    background:var(--marble);
+    padding:1rem 6vw 5rem;
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:4rem;
+    align-items:start;
+  }
+  .intro .label{
+    font-size:0.75rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:1rem;
+  }
+  .intro h2{
+    font-size:clamp(1.8rem,3vw,2.6rem);
+    color:var(--ink);
+    margin-bottom:1.4rem;
+  }
+  .intro p{
+    color:var(--ink-soft);
+    font-size:1rem;
+    margin-bottom:1.1rem;
+  }
+  .intro-side{
+    border-left:1px solid var(--marble-dark);
+    padding-left:2.2rem;
+  }
+  .intro-side .quote{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--ink);
+    line-height:1.7;
+  }
+  .intro-side .quote span{
+    display:block;
+    margin-top:0.8rem;
+    font-family:'Noto Serif JP', serif;
+    font-style:normal;
+    font-size:0.75rem;
+    letter-spacing:0.15em;
+    color:var(--ink-soft);
+  }
+
+  /* ===== 時代セクション ===== */
+  .eras{
+    background:var(--ink);
+    padding:5.5rem 6vw;
+    color:var(--marble);
+  }
+  .eras .section-head{
+    text-align:center;
+    margin-bottom:3.2rem;
+  }
+  .eras .label{
+    font-size:0.75rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:0.8rem;
+  }
+  .eras h2{
+    font-size:clamp(1.8rem,3vw,2.6rem);
+    color:var(--cloud);
+  }
+  .era-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:rgba(243,239,228,0.15);
+    border-top:1px solid rgba(243,239,228,0.15);
+    border-bottom:1px solid rgba(243,239,228,0.15);
+  }
+  .era-card{
+    background:var(--ink);
+    padding:2.6rem 1.8rem;
+    transition:background 0.35s ease;
+  }
+  .era-card:hover{ background:#25495c; }
+  .era-card .years{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.1rem;
+    color:var(--gold);
+    letter-spacing:0.05em;
+  }
+  .era-card h3{
+    font-size:1.4rem;
+    margin:0.6rem 0 0.8rem;
+    color:var(--cloud);
+  }
+  .era-card p{
+    font-size:0.88rem;
+    color:var(--marble-dark);
+    line-height:1.8;
+  }
+
+  /* ===== ナビゲーションカード（他ページへの導線） ===== */
+  .pages{
+    background:var(--marble);
+    padding:5.5rem 6vw 6rem;
+  }
+  .pages .section-head{
+    text-align:center;
+    margin-bottom:3rem;
+  }
+  .pages .label{
+    font-size:0.75rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:0.8rem;
+  }
+  .pages h2{
+    font-size:clamp(1.8rem,3vw,2.6rem);
+    color:var(--ink);
+  }
+  .page-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.6rem;
+  }
+  .page-card{
+    background:var(--cloud);
+    border:1px solid var(--marble-dark);
+    padding:2.4rem 2rem;
+    text-decoration:none;
+    color:var(--ink);
+    position:relative;
+    overflow:hidden;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .page-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(28,58,74,0.12);
+  }
+  .page-card .num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:0.85rem;
+    color:var(--gold);
+    letter-spacing:0.2em;
+  }
+  .page-card h3{
+    font-size:1.5rem;
+    margin:0.7rem 0 0.6rem;
+  }
+  .page-card p{
+    font-size:0.87rem;
+    color:var(--ink-soft);
+  }
+  .page-card .arrow{
+    display:inline-block;
+    margin-top:1.2rem;
+    font-size:0.8rem;
+    color:var(--terracotta);
+    letter-spacing:0.1em;
+  }
+
+  /* ===== フッター ===== */
+  footer{
+    background:var(--ink);
+    color:var(--marble-dark);
+    padding:3.2rem 6vw 2.2rem;
+    font-size:0.8rem;
+  }
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:1.6rem;
+    padding-bottom:2rem;
+    border-bottom:1px solid rgba(243,239,228,0.15);
+    margin-bottom:1.6rem;
+  }
+  footer .brand{ color:var(--cloud); font-size:1.2rem; }
+  footer .foot-links{ display:flex; gap:1.6rem; }
+  footer .foot-links a{ text-decoration:none; color:var(--marble-dark); }
+  footer .foot-links a:hover{ color:var(--gold); }
+  footer .ai-notice{
+    font-size:0.72rem;
+    color:#8FA3AD;
+    line-height:1.7;
+    max-width:60em;
+  }
+  footer .copyright{
+    margin-top:1rem;
+    font-size:0.72rem;
+    color:#8FA3AD;
+  }
+
+  @media (max-width:880px){
+    nav.site-nav{ display:none; }
+    .intro{ grid-template-columns:1fr; gap:2rem; }
+    .intro-side{ border-left:none; border-top:1px solid var(--marble-dark); padding-left:0; padding-top:1.6rem; }
+    .era-grid{ grid-template-columns:repeat(2,1fr); }
+    .page-grid{ grid-template-columns:1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cloud-back, .cloud-mid, .cloud-front, .temple-wrap, .scroll-hint .line{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">ARCADIA SKY <small>古代ギリシャ史ノート</small></a>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="index.html" class="current">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="cloud-layer cloud-back">
+    <svg viewBox="0 0 1600 220" preserveAspectRatio="none">
+      <path fill="#FDFCF7" d="M0,160 Q60,110 140,140 Q180,90 260,110 Q320,70 400,110 Q470,80 540,120 Q620,90 700,130 Q780,100 860,140 Q940,100 1020,135 Q1100,95 1180,130 Q1260,100 1340,135 Q1420,105 1500,140 Q1560,120 1600,140 L1600,220 L0,220 Z"/>
+    </svg>
+  </div>
+  <div class="cloud-layer cloud-mid">
+    <svg viewBox="0 0 1600 220" preserveAspectRatio="none">
+      <path fill="#FDFCF7" d="M0,180 Q80,130 180,155 Q230,100 320,130 Q390,90 470,125 Q550,95 630,135 Q710,100 800,140 Q880,105 970,140 Q1050,105 1140,140 Q1220,110 1300,145 Q1390,115 1470,150 Q1540,130 1600,150 L1600,220 L0,220 Z"/>
+    </svg>
+  </div>
+
+  <div class="temple-wrap">
+    <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg">
+      <!-- 段状の基壇 -->
+      <rect x="60" y="270" width="500" height="14" fill="#F3EFE4"/>
+      <rect x="80" y="256" width="460" height="14" fill="#F3EFE4"/>
+      <rect x="100" y="242" width="420" height="14" fill="#FDFCF7"/>
+      <!-- 柱 -->
+      <g fill="#FDFCF7">
+        <rect x="120" y="120" width="16" height="122"/>
+        <rect x="168" y="120" width="16" height="122"/>
+        <rect x="216" y="120" width="16" height="122"/>
+        <rect x="264" y="120" width="16" height="122"/>
+        <rect x="312" y="120" width="16" height="122"/>
+        <rect x="360" y="120" width="16" height="122"/>
+        <rect x="408" y="120" width="16" height="122"/>
+        <rect x="456" y="120" width="16" height="122"/>
+        <rect x="484" y="120" width="16" height="122"/>
+      </g>
+      <!-- 柱頭のライン -->
+      <rect x="100" y="112" width="420" height="10" fill="#F3EFE4"/>
+      <!-- エンタブラチュア -->
+      <rect x="90" y="88" width="440" height="18" fill="#FDFCF7"/>
+      <rect x="90" y="80" width="440" height="8" fill="#C9A24B"/>
+      <!-- 破風（三角屋根） -->
+      <polygon points="310,20 90,88 530,88" fill="#F3EFE4"/>
+      <polygon points="310,32 112,84 508,84" fill="#FDFCF7" opacity="0.5"/>
+      <!-- 屋根の輝きライン -->
+      <line x1="310" y1="20" x2="90" y2="88" stroke="#C9A24B" stroke-width="2" opacity="0.6"/>
+      <line x1="310" y1="20" x2="530" y2="88" stroke="#C9A24B" stroke-width="2" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="cloud-layer cloud-front">
+    <svg viewBox="0 0 1600 260" preserveAspectRatio="none">
+      <path fill="#FDFCF7" d="M0,200 Q100,140 220,170 Q280,110 380,145 Q460,100 560,140 Q650,105 750,150 Q840,110 940,155 Q1030,115 1130,155 Q1220,120 1320,160 Q1410,125 1500,165 Q1560,145 1600,165 L1600,260 L0,260 Z"/>
+    </svg>
+  </div>
+
+  <div class="hero-copy">
+    <span class="eyebrow">Notes on Ancient Hellas</span>
+    <h1>雲の上に、まだ神々がいた頃</h1>
+    <p>ポリスの誕生から、ペルシア戦争、そしてヘレニズムの黄昏まで。古代ギリシャの歴史と神話をめぐる個人的な学びの記録です。</p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<div class="column-divider">
+  <svg viewBox="0 0 20 46"><rect x="7" y="0" width="6" height="40" fill="#3E5B6B"/><rect x="4" y="40" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 46"><rect x="7" y="0" width="6" height="40" fill="#3E5B6B"/><rect x="4" y="40" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 46"><rect x="7" y="0" width="6" height="40" fill="#3E5B6B"/><rect x="4" y="40" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 46"><rect x="7" y="0" width="6" height="40" fill="#3E5B6B"/><rect x="4" y="40" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 46"><rect x="7" y="0" width="6" height="40" fill="#3E5B6B"/><rect x="4" y="40" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+</div>
+
+<section class="intro">
+  <div class="intro-main">
+    <div class="label">About this site</div>
+    <h2>なぜ、古代ギリシャなのか</h2>
+    <p>エーゲ海の光を受けて建つ白い神殿、哲学者たちの対話、都市国家という小さな実験の数々——古代ギリシャは、今も私たちの言葉や制度の奥に静かに残っています。</p>
+    <p>このサイトは、ミケーネ文明の終焉からアレクサンドロス大王の遠征、そしてローマに飲み込まれるまでの約1000年間を、専門家としてではなく、ひとりの学び手として辿り直す記録です。</p>
+  </div>
+  <div class="intro-side">
+    <p class="quote">「汝自身を知れ」
+      <span>デルフォイのアポロン神殿、刻銘</span>
+    </p>
+  </div>
+</section>
+
+<section class="eras">
+  <div class="section-head">
+    <div class="label">Timeline</div>
+    <h2>四つの時代</h2>
+  </div>
+  <div class="era-grid">
+    <div class="era-card">
+      <div class="years">c.1200–800 BC</div>
+      <h3>暗黒時代</h3>
+      <p>ミケーネ文明崩壊後、文字を失った混沌の三百年。しかし後の叙事詩の種は、この時代の口承に蒔かれていた。</p>
+    </div>
+    <div class="era-card">
+      <div class="years">800–480 BC</div>
+      <h3>アルカイック期</h3>
+      <p>ポリスの成立、植民市の拡大、そしてアテナイとスパルタという対照的な二つの実験が形を持ち始める。</p>
+    </div>
+    <div class="era-card">
+      <div class="years">480–323 BC</div>
+      <h3>古典期</h3>
+      <p>ペルシア戦争の勝利からペロポネソス戦争の疲弊まで。哲学、演劇、彫刻がもっとも輝いた百五十年間。</p>
+    </div>
+    <div class="era-card">
+      <div class="years">323–30 BC</div>
+      <h3>ヘレニズム期</h3>
+      <p>アレクサンドロスの遠征がギリシャ文化を東方へと押し広げ、やがてローマという新たな波に飲まれていく。</p>
+    </div>
+  </div>
+</section>
+
+<section class="pages">
+  <div class="section-head">
+    <div class="label">Explore</div>
+    <h2>サイト内をめぐる</h2>
+  </div>
+  <div class="page-grid">
+    <a href="blog.html" class="page-card">
+      <div class="num">01</div>
+      <h3>Blog</h3>
+      <p>学びの記録を日付順に。読んだ本、考えたこと、気づいたことの断片。</p>
+      <span class="arrow">読む →</span>
+    </a>
+    <a href="gallery.html" class="page-card">
+      <div class="num">02</div>
+      <h3>Gallery</h3>
+      <p>遺跡、壺絵、彫刻——古代ギリシャの視覚世界をめぐる画像記録。</p>
+      <span class="arrow">見る →</span>
+    </a>
+    <a href="about.html" class="page-card">
+      <div class="num">03</div>
+      <h3>About</h3>
+      <p>このサイトについて、そして書き手についての簡単な紹介。</p>
+      <span class="arrow">知る →</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="brand">ARCADIA SKY</a>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="ai-notice">本サイトのすべてのテキストおよび画像は、AIモデルの学習目的での使用・収集・複製を禁じます。No content on this site may be used for AI training purposes.</p>
+  <p class="copyright">© Arcadia Sky — Notes on Ancient Hellas</p>
+</footer>
+
+</body>
+</html>
