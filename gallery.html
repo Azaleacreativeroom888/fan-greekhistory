@@ -180,6 +180,63 @@
   .g-caption h3{ font-size:1.2rem; color:var(--ink); margin-bottom:0.4rem; }
   .g-caption p{ font-size:0.84rem; color:var(--ink-soft); }
 
+  /* ===== REPORT LINK BOX ===== */
+  .report-link-wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 6vw 3.5rem;
+  }
+  .report-link{
+    position:relative;
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    gap:2rem;
+    padding:2.2rem 2.6rem;
+    text-decoration:none;
+    color:var(--cloud);
+    background:linear-gradient(120deg, var(--sky-top), var(--sky-mid));
+    border:1px solid var(--gold);
+    overflow:hidden;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .report-link::before{
+    content:"";
+    position:absolute;
+    inset:6px;
+    border:1px solid rgba(253,252,247,0.35);
+    pointer-events:none;
+  }
+  .report-link:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 40px rgba(28,58,74,0.22);
+  }
+  .report-link .rl-icon svg{ width:64px; height:64px; display:block; }
+  .report-link .rl-label{
+    font-size:0.7rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:0.3rem;
+    text-shadow:0 1px 6px rgba(15,35,48,0.35);
+  }
+  .report-link h3{
+    font-size:clamp(1.3rem,2.4vw,1.8rem);
+    color:var(--cloud);
+    text-shadow:0 2px 12px rgba(15,35,48,0.35);
+    margin-bottom:0.3rem;
+  }
+  .report-link p{
+    font-size:0.86rem;
+    color:var(--marble);
+  }
+  .report-link .rl-arrow{
+    font-size:0.85rem;
+    letter-spacing:0.12em;
+    color:var(--cloud);
+    white-space:nowrap;
+  }
+
   /* 背景バリエーション */
   .bg-sky{ background:linear-gradient(160deg, var(--sky-mid), var(--sky-low)); }
   .bg-marble{ background:linear-gradient(160deg, var(--marble), var(--marble-dark)); }
@@ -208,6 +265,8 @@
   @media (max-width:880px){
     nav.site-nav{ display:none; }
     .gallery-grid{ grid-template-columns:1fr; }
+    .report-link{ grid-template-columns:1fr; gap:1rem; padding:1.8rem 1.6rem; text-align:center; }
+    .report-link .rl-icon svg{ margin:0 auto; }
   }
   @media (min-width:881px) and (max-width:1180px){
     .gallery-grid{ grid-template-columns:repeat(2,1fr); }
@@ -252,6 +311,28 @@
 <div class="gallery-intro">
   <div class="label">A visual record</div>
   <p>遺跡、壺絵、彫刻——古代ギリシャの視覚世界をめぐる記録です。写真は順次追加していきます。</p>
+</div>
+
+<div class="report-link-wrap">
+  <a href="report1.html" class="report-link">
+    <div class="rl-icon">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <polygon points="32,6 6,22 58,22" fill="#FDFCF7"/>
+        <rect x="6" y="22" width="52" height="4" fill="#C9A24B"/>
+        <rect x="11" y="28" width="5" height="22" fill="#FDFCF7"/>
+        <rect x="22" y="28" width="5" height="22" fill="#FDFCF7"/>
+        <rect x="37" y="28" width="5" height="22" fill="#FDFCF7"/>
+        <rect x="48" y="28" width="5" height="22" fill="#FDFCF7"/>
+        <rect x="6" y="50" width="52" height="5" fill="#F3EFE4"/>
+      </svg>
+    </div>
+    <div class="rl-text">
+      <div class="rl-label">Special Report</div>
+      <h3>古代ギリシャに関わる人物</h3>
+      <p>哲学者、政治家、将軍、詩人——古代ギリシャを動かした人々をまとめた特集ページです。</p>
+    </div>
+    <div class="rl-arrow">READ →</div>
+  </a>
 </div>
 
 <div class="filter-tabs">
