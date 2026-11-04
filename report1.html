@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>古代ギリシャに関わる人物 | アルカディアの空</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#2E7BA6;
+    --sky-mid:#5FB8E0;
+    --sky-low:#A8DCEF;
+    --cloud:#FDFCF7;
+    --marble:#F3EFE4;
+    --marble-dark:#E4DCC8;
+    --gold:#C9A24B;
+    --terracotta:#B0603D;
+    --ink:#1C3A4A;
+    --ink-soft:#3E5B6B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Serif JP', serif;
+    color:var(--ink);
+    background:var(--marble);
+    line-height:1.9;
+  }
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond','Noto Serif JP',serif;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;}
+
+  /* ===== HEADER / NAV ===== */
+  header.site-header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 6vw;
+    background:linear-gradient(to bottom, rgba(28,58,74,0.55), transparent);
+  }
+  .brand{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.5rem; color:var(--cloud); letter-spacing:0.12em;
+    text-decoration:none; display:flex; align-items:baseline; gap:8px;
+  }
+  .brand small{
+    font-family:'Noto Serif JP', serif;
+    font-size:0.62rem; color:var(--marble-dark); letter-spacing:0.2em;
+  }
+  nav.site-nav ul{ list-style:none; display:flex; gap:2.4rem; }
+  nav.site-nav a{
+    text-decoration:none; color:var(--cloud);
+    font-size:0.92rem; letter-spacing:0.08em;
+    position:relative; padding-bottom:4px;
+  }
+  nav.site-nav a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0;
+    height:1px; background:var(--gold);
+    transform:scaleX(0); transform-origin:left; transition:transform 0.3s ease;
+  }
+  nav.site-nav a:hover::after{transform:scaleX(1);}
+  nav.site-nav a.current::after{transform:scaleX(1);}
+
+  /* ===== PAGE HERO ===== */
+  .page-hero{
+    position:relative; height:46vh; min-height:320px;
+    background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 60%, var(--sky-low) 100%);
+    overflow:hidden;
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .page-hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 50% 30%, rgba(255,255,255,0.3), transparent);
+    opacity:0.8;
+  }
+  .page-hero .cloud-layer{
+    position:absolute; left:-10%; width:120%; bottom:-6%;
+    animation:drift 50s linear infinite;
+  }
+  .page-hero .cloud-layer svg{width:100%; display:block;}
+  @keyframes drift{ from{transform:translateX(0);} to{transform:translateX(-10%);} }
+  .page-hero-copy{ position:relative; z-index:3; text-align:center; color:var(--cloud); padding:0 6vw 3.4rem; }
+  .page-hero-copy .eyebrow{
+    display:block; font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:0.6rem;
+  }
+  .page-hero-copy h1{
+    font-size:clamp(1.8rem,4.2vw,3rem); color:var(--cloud);
+    text-shadow:0 4px 20px rgba(15,35,48,0.4);
+  }
+
+  /* ===== 柱の区切り ===== */
+  .column-divider{
+    display:flex; justify-content:center; align-items:flex-end;
+    gap:clamp(10px,3vw,26px);
+    padding:2.2rem 6vw 1rem;
+    background:var(--marble);
+  }
+  .column-divider svg{ height:40px; opacity:0.5; }
+
+  /* ===== REPORT ===== */
+  .report-wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding:1rem 6vw 5rem;
+  }
+  .back-link{
+    display:inline-block;
+    font-size:0.82rem;
+    letter-spacing:0.1em;
+    text-decoration:none;
+    color:var(--terracotta);
+    margin-bottom:1.8rem;
+  }
+  .back-link:hover{ text-decoration:underline; }
+
+  .report-intro{
+    text-align:center;
+    margin-bottom:3rem;
+  }
+  .report-intro .label{
+    font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--terracotta); margin-bottom:0.7rem;
+  }
+  .report-intro p{
+    color:var(--ink-soft); font-size:0.95rem;
+    max-width:40em; margin:0.6rem auto 0;
+  }
+  .report-intro .note{
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    opacity:0.85;
+  }
+
+  table.people{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--cloud);
+    border:1px solid var(--marble-dark);
+  }
+  table.people thead th{
+    background:var(--ink);
+    color:var(--cloud);
+    font-family:'Noto Serif JP', serif;
+    font-weight:500;
+    font-size:0.82rem;
+    letter-spacing:0.15em;
+    text-align:left;
+    padding:1rem 1.3rem;
+  }
+  table.people thead th .num{
+    font-family:'Cormorant Garamond', serif;
+    color:var(--gold);
+    margin-right:0.4rem;
+  }
+  table.people tbody tr{
+    border-bottom:1px solid var(--marble-dark);
+    transition:background 0.25s ease;
+  }
+  table.people tbody tr:last-child{ border-bottom:none; }
+  table.people tbody tr:hover{ background:#F8F5EC; }
+  table.people td{
+    padding:1.3rem 1.3rem;
+    vertical-align:top;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  td.name{
+    width:22%;
+    color:var(--ink);
+  }
+  td.name .person{
+    font-family:'Cormorant Garamond','Noto Serif JP', serif;
+    font-weight:600;
+    font-size:1.2rem;
+    line-height:1.4;
+    display:block;
+  }
+  td.name .tag{
+    display:inline-block;
+    margin-top:0.4rem;
+    font-size:0.66rem;
+    letter-spacing:0.12em;
+    color:var(--terracotta);
+    border:1px solid var(--terracotta);
+    border-radius:999px;
+    padding:0.05rem 0.7rem;
+    line-height:1.7;
+  }
+  td.years{
+    width:22%;
+    font-family:'Cormorant Garamond','Noto Serif JP', serif;
+    font-size:1.05rem;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  td.years small{
+    display:block;
+    font-family:'Noto Serif JP', serif;
+    font-size:0.7rem;
+    color:var(--ink-soft);
+    white-space:normal;
+    margin-top:0.2rem;
+  }
+
+  /* ===== フッター ===== */
+  footer{
+    background:var(--ink); color:var(--marble-dark);
+    padding:3.2rem 6vw 2.2rem; font-size:0.8rem;
+  }
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:1.6rem;
+    padding-bottom:2rem;
+    border-bottom:1px solid rgba(243,239,228,0.15);
+    margin-bottom:1.6rem;
+  }
+  footer .brand{ color:var(--cloud); font-size:1.2rem; }
+  footer .foot-links{ display:flex; gap:1.6rem; }
+  footer .foot-links a{ text-decoration:none; color:var(--marble-dark); }
+  footer .foot-links a:hover{ color:var(--gold); }
+  footer .ai-notice{ font-size:0.72rem; color:#8FA3AD; line-height:1.7; max-width:60em; }
+  footer .copyright{ margin-top:1rem; font-size:0.72rem; color:#8FA3AD; }
+
+  @media (max-width:880px){
+    nav.site-nav{ display:none; }
+    table.people thead{ display:none; }
+    table.people, table.people tbody, table.people tr, table.people td{ display:block; width:100%; }
+    table.people tbody tr{ padding:1.2rem 1.2rem 1.3rem; }
+    table.people td{ padding:0.25rem 0; }
+    td.name, td.years{ width:100%; }
+    td.years{ white-space:normal; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .page-hero .cloud-layer{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">ARCADIA SKY <small>古代ギリシャ史ノート</small></a>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html" class="current">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="cloud-layer">
+    <svg viewBox="0 0 1600 220" preserveAspectRatio="none">
+      <path fill="#FDFCF7" d="M0,170 Q80,120 180,150 Q230,100 320,130 Q390,90 470,125 Q550,95 630,135 Q710,100 800,140 Q880,105 970,140 Q1050,105 1140,140 Q1220,110 1300,145 Q1390,115 1470,150 Q1540,130 1600,150 L1600,220 L0,220 Z"/>
+    </svg>
+  </div>
+  <div class="page-hero-copy">
+    <span class="eyebrow">Special Report</span>
+    <h1>古代ギリシャに関わる人物</h1>
+  </div>
+</section>
+
+<div class="column-divider">
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+</div>
+
+<div class="report-wrap">
+  <a href="gallery.html" class="back-link">← Galleryへ戻る</a>
+
+  <div class="report-intro">
+    <div class="label">Who's who in Hellas</div>
+    <p>詩人、政治家、哲学者、将軍——古代ギリシャの歴史をつくった人々を、生まれた年の古い順に並べました。</p>
+    <p class="note">年はすべて紀元前。「頃」は推定、「不詳」は記録が残っていないことを示します。</p>
+  </div>
+
+  <table class="people">
+    <thead>
+      <tr>
+        <th><span class="num">①</span>人物名</th>
+        <th><span class="num">②</span>生没年</th>
+        <th><span class="num">③</span>解説</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="name"><span class="person">ホメロス</span><span class="tag">詩人</span></td>
+        <td class="years">不詳<small>前8世紀頃の人物とされる</small></td>
+        <td>『イリアス』『オデュッセイア』の作者とされる叙事詩人。ギリシャ人の神々や英雄のイメージの土台をつくったが、実在や作者像については今も議論がある。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ヘシオドス</span><span class="tag">詩人</span></td>
+        <td class="years">不詳<small>前700年頃に活動</small></td>
+        <td>『神統記』で神々の系譜を、『仕事と日』で農民の暮らしと労働の価値を歌った詩人。神話をまとめた最初期の作者のひとり。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ソロン</span><span class="tag">政治家</span></td>
+        <td class="years">前640頃 – 前560頃</td>
+        <td>アテナイの政治家で、七賢人のひとり。借金で奴隷になっていた市民を救い、財産に応じて市民の権利を分ける改革を行って、後の民主政への道を開いた。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">サッフォー</span><span class="tag">詩人</span></td>
+        <td class="years">前630頃 – 前570頃</td>
+        <td>レスボス島出身の女性詩人。恋や友情、別れの感情を歌った抒情詩で知られ、古代には「十番目のムーサ（芸術の女神）」とも称えられた。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">タレス</span><span class="tag">哲学者</span></td>
+        <td class="years">前624頃 – 前546頃</td>
+        <td>ミレトス出身。「万物の根源は水である」と神話ではなく自然そのものから世界を説明しようとし、「最初の哲学者」と呼ばれる。七賢人のひとり。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ペイシストラトス</span><span class="tag">政治家</span></td>
+        <td class="years">前600頃 – 前527</td>
+        <td>アテナイの僭主。貴族と対立しながら権力を握り、貧しい農民への支援や祭典の整備を進めた。アテナイが文化都市として伸びる基礎をつくった。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ピタゴラス</span><span class="tag">哲学者・数学者</span></td>
+        <td class="years">前570頃 – 前495頃</td>
+        <td>サモス島出身で、後に南イタリアで教団を開いた。「万物は数である」と考えた。ピタゴラスの定理を彼自身が証明したかどうかは、はっきりしていない。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">アイスキュロス</span><span class="tag">劇作家</span></td>
+        <td class="years">前525頃 – 前456</td>
+        <td>「悲劇の父」と呼ばれるアテナイの劇作家。『オレステイア』三部作が代表作。マラトンの戦いに従軍したともいわれ、ペルシア戦争を題材にした『ペルシア人』も残した。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">テミストクレス</span><span class="tag">政治家・将軍</span></td>
+        <td class="years">前524頃 – 前459頃</td>
+        <td>海軍の強化を進め、前480年のサラミスの海戦でギリシャ連合艦隊をペルシアに勝利させたアテナイの指導者。のちに陶片追放となり、ペルシアに亡命した。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">レオニダス1世</span><span class="tag">スパルタ王</span></td>
+        <td class="years">生年不詳 – 前480</td>
+        <td>ペルシア戦争のテルモピュライの戦いで、少数の兵を率いて大軍を食い止め、戦死したスパルタの王。その最期はギリシャ人の勇気の象徴として語り継がれた。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ペリクレス</span><span class="tag">政治家・将軍</span></td>
+        <td class="years">前495頃 – 前429</td>
+        <td>アテナイ民主政の全盛期を率いた指導者。パルテノン神殿の建設を進め、文化を育てた。ペロポネソス戦争の初期に、疫病にかかって亡くなった。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ソフォクレス</span><span class="tag">劇作家</span></td>
+        <td class="years">前496頃 – 前406</td>
+        <td>『オイディプス王』『アンティゴネ』などを書いた悲劇詩人。人間の運命と責任を深く描き、古典期のアテナイ演劇を代表する存在とされる。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ヘロドトス</span><span class="tag">歴史家</span></td>
+        <td class="years">前484頃 – 前425頃</td>
+        <td>「歴史の父」と呼ばれる。ペルシア戦争を中心に、各地を旅して集めた見聞を『歴史』にまとめた。出来事の原因を人間の行動から探ろうとした。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">エウリピデス</span><span class="tag">劇作家</span></td>
+        <td class="years">前480頃 – 前406</td>
+        <td>『メディア』などで知られる悲劇詩人。神々や英雄よりも、人間の弱さや感情の揺れを描いたことで、のちの時代に大きな影響を与えた。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ソクラテス</span><span class="tag">哲学者</span></td>
+        <td class="years">前470頃 – 前399</td>
+        <td>アテナイの街角で人々に問いを投げかけ、「無知の知」を説いた。青年を惑わせたなどの罪で裁判にかけられ、毒杯をあおいで亡くなった。自身は著作を残していない。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ヒポクラテス</span><span class="tag">医学者</span></td>
+        <td class="years">前460頃 – 前370頃</td>
+        <td>コス島出身で「医学の父」と呼ばれる。病気を神の罰ではなく自然の現象として観察し、診察と記録を重んじた。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">トゥキュディデス</span><span class="tag">歴史家</span></td>
+        <td class="years">前460頃 – 前400頃</td>
+        <td>ペロポネソス戦争を『戦史』に記録したアテナイの歴史家。自身も将軍として戦争に関わり、失敗して追放された。感情を抑えた客観的な叙述で知られる。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">アリストファネス</span><span class="tag">劇作家</span></td>
+        <td class="years">前446頃 – 前386頃</td>
+        <td>『雲』『蛙』などの喜劇で知られる。政治家や知識人を遠慮なく笑いの種にし、当時のアテナイ社会の空気を生き生きと伝える。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">プラトン</span><span class="tag">哲学者</span></td>
+        <td class="years">前427 – 前347</td>
+        <td>ソクラテスの弟子。アテナイ郊外に学園アカデメイアを開き、『国家』などの対話篇で、理想の国家や永遠不変の「イデア」を論じた。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">ディオゲネス</span><span class="tag">哲学者</span></td>
+        <td class="years">前412頃 – 前323頃</td>
+        <td>キュニコス派（犬儒派）の代表。樽の中で暮らしたという逸話で知られ、財産や名声を捨てて自然に生きることを説いた。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">アリストテレス</span><span class="tag">哲学者・科学者</span></td>
+        <td class="years">前384 – 前322</td>
+        <td>プラトンの弟子で、学園リュケイオンを開いた。論理学、倫理学、生物学など幅広い分野を体系化し、若き日のアレクサンドロスの家庭教師も務めた。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">デモステネス</span><span class="tag">弁論家</span></td>
+        <td class="years">前384 – 前322</td>
+        <td>アテナイの弁論家。マケドニアのフィリッポス2世の脅威を訴えて何度も演説し、市民に抵抗を呼びかけた。古代最高の雄弁家のひとりとされる。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">フィリッポス2世</span><span class="tag">マケドニア王</span></td>
+        <td class="years">前382 – 前336</td>
+        <td>マケドニアを強国に育てた王。前338年のカイロネイアの戦いでアテナイとテーベの連合軍を破り、ギリシャを事実上支配した。暗殺され、息子アレクサンドロスが後を継いだ。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">アレクサンドロス大王</span><span class="tag">マケドニア王</span></td>
+        <td class="years">前356 – 前323</td>
+        <td>20歳で王となり、東方遠征でペルシア帝国を滅ぼした。支配はインド西北部にまで及び、ヘレニズム文化が広がるきっかけとなった。バビロンで32歳で死去。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">エピクロス</span><span class="tag">哲学者</span></td>
+        <td class="years">前341 – 前270</td>
+        <td>アテナイに学園「園」を開いたヘレニズム期の哲学者。心の平静こそ最高の快楽であると説き、死や神々への恐れから自由になることを目指した。</td>
+      </tr>
+
+      <tr>
+        <td class="name"><span class="person">アルキメデス</span><span class="tag">数学者・科学者</span></td>
+        <td class="years">前287頃 – 前212</td>
+        <td>シラクサ（シチリア島）の数学者・物理学者。浮力の原理やてこの法則を研究した。ローマ軍がシラクサを攻め落とした際に命を落としたと伝えられる。</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="brand">ARCADIA SKY</a>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="ai-notice">本サイトのすべてのテキストおよび画像は、AIモデルの学習目的での使用・収集・複製を禁じます。No content on this site may be used for AI training purposes.</p>
+  <p class="copyright">© Arcadia Sky — Notes on Ancient Hellas</p>
+</footer>
+
+</body>
+</html>
