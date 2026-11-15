@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>ギリシャ神話の神一覧 | アルカディアの空</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#2E7BA6;
+    --sky-mid:#5FB8E0;
+    --sky-low:#A8DCEF;
+    --cloud:#FDFCF7;
+    --marble:#F3EFE4;
+    --marble-dark:#E4DCC8;
+    --gold:#C9A24B;
+    --terracotta:#B0603D;
+    --ink:#1C3A4A;
+    --ink-soft:#3E5B6B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Serif JP', serif;
+    color:var(--ink);
+    background:var(--marble);
+    line-height:1.9;
+  }
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond','Noto Serif JP',serif;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;}
+
+  /* ===== HEADER / NAV ===== */
+  header.site-header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 6vw;
+    background:linear-gradient(to bottom, rgba(28,58,74,0.55), transparent);
+  }
+  .brand{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.5rem; color:var(--cloud); letter-spacing:0.12em;
+    text-decoration:none; display:flex; align-items:baseline; gap:8px;
+  }
+  .brand small{
+    font-family:'Noto Serif JP', serif;
+    font-size:0.62rem; color:var(--marble-dark); letter-spacing:0.2em;
+  }
+  nav.site-nav ul{ list-style:none; display:flex; gap:2.4rem; }
+  nav.site-nav a{
+    text-decoration:none; color:var(--cloud);
+    font-size:0.92rem; letter-spacing:0.08em;
+    position:relative; padding-bottom:4px;
+  }
+  nav.site-nav a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0;
+    height:1px; background:var(--gold);
+    transform:scaleX(0); transform-origin:left; transition:transform 0.3s ease;
+  }
+  nav.site-nav a:hover::after{transform:scaleX(1);}
+  nav.site-nav a.current::after{transform:scaleX(1);}
+
+  /* ===== PAGE HERO ===== */
+  .page-hero{
+    position:relative; height:46vh; min-height:320px;
+    background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 60%, var(--sky-low) 100%);
+    overflow:hidden;
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .page-hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 50% 30%, rgba(255,255,255,0.3), transparent);
+    opacity:0.8;
+  }
+  .page-hero .cloud-layer{
+    position:absolute; left:-10%; width:120%; bottom:-6%;
+    animation:drift 50s linear infinite;
+  }
+  .page-hero .cloud-layer svg{width:100%; display:block;}
+  @keyframes drift{ from{transform:translateX(0);} to{transform:translateX(-10%);} }
+  .page-hero-copy{ position:relative; z-index:3; text-align:center; color:var(--cloud); padding:0 6vw 3.4rem; }
+  .page-hero-copy .eyebrow{
+    display:block; font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:0.6rem;
+  }
+  .page-hero-copy h1{
+    font-size:clamp(1.8rem,4.2vw,3rem); color:var(--cloud);
+    text-shadow:0 4px 20px rgba(15,35,48,0.4);
+  }
+
+  /* ===== 柱の区切り ===== */
+  .column-divider{
+    display:flex; justify-content:center; align-items:flex-end;
+    gap:clamp(10px,3vw,26px);
+    padding:2.2rem 6vw 1rem;
+    background:var(--marble);
+  }
+  .column-divider svg{ height:40px; opacity:0.5; }
+
+  /* ===== REPORT ===== */
+  .report-wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding:1rem 6vw 5rem;
+  }
+  .back-link{
+    display:inline-block;
+    font-size:0.82rem;
+    letter-spacing:0.1em;
+    text-decoration:none;
+    color:var(--terracotta);
+    margin-bottom:1.8rem;
+  }
+  .back-link:hover{ text-decoration:underline; }
+
+  .report-intro{
+    text-align:center;
+    margin-bottom:3rem;
+  }
+  .report-intro .label{
+    font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--terracotta); margin-bottom:0.7rem;
+  }
+  .report-intro p{
+    color:var(--ink-soft); font-size:0.95rem;
+    max-width:40em; margin:0.6rem auto 0;
+  }
+  .report-intro .note{
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    opacity:0.85;
+  }
+
+  table.gods{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--cloud);
+    border:1px solid var(--marble-dark);
+  }
+  table.gods thead th{
+    background:var(--ink);
+    color:var(--cloud);
+    font-family:'Noto Serif JP', serif;
+    font-weight:500;
+    font-size:0.82rem;
+    letter-spacing:0.15em;
+    text-align:left;
+    padding:1rem 1.3rem;
+  }
+  table.gods tbody tr{
+    border-bottom:1px solid var(--marble-dark);
+    transition:background 0.25s ease;
+  }
+  table.gods tbody tr:last-child{ border-bottom:none; }
+  table.gods tbody tr.god:hover{ background:#F8F5EC; }
+  table.gods td{
+    padding:1.2rem 1.3rem;
+    vertical-align:top;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  td.name{
+    width:26%;
+    color:var(--ink);
+  }
+  td.name .person{
+    font-family:'Cormorant Garamond','Noto Serif JP', serif;
+    font-weight:600;
+    font-size:1.2rem;
+    line-height:1.4;
+    display:block;
+  }
+  td.name .roman{
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--terracotta);
+    letter-spacing:0.05em;
+  }
+
+  /* グループ見出し行 */
+  table.gods tr.group td{
+    background:linear-gradient(90deg, #D4EEF7, var(--cloud));
+    padding:0.7rem 1.3rem;
+    font-size:0.76rem;
+    letter-spacing:0.25em;
+    color:var(--ink);
+    border-top:1px solid var(--gold);
+    border-bottom:1px solid var(--marble-dark);
+  }
+  table.gods tr.group td .en{
+    font-family:'Cormorant Garamond', serif;
+    color:var(--terracotta);
+    margin-left:0.8rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+  }
+
+  /* ===== フッター ===== */
+  footer{
+    background:var(--ink); color:var(--marble-dark);
+    padding:3.2rem 6vw 2.2rem; font-size:0.8rem;
+  }
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:1.6rem;
+    padding-bottom:2rem;
+    border-bottom:1px solid rgba(243,239,228,0.15);
+    margin-bottom:1.6rem;
+  }
+  footer .brand{ color:var(--cloud); font-size:1.2rem; }
+  footer .foot-links{ display:flex; gap:1.6rem; }
+  footer .foot-links a{ text-decoration:none; color:var(--marble-dark); }
+  footer .foot-links a:hover{ color:var(--gold); }
+  footer .ai-notice{ font-size:0.72rem; color:#8FA3AD; line-height:1.7; max-width:60em; }
+  footer .copyright{ margin-top:1rem; font-size:0.72rem; color:#8FA3AD; }
+
+  @media (max-width:880px){
+    nav.site-nav{ display:none; }
+    table.gods thead{ display:none; }
+    table.gods, table.gods tbody, table.gods tr, table.gods td{ display:block; width:100%; }
+    table.gods tr.god{ padding:1.1rem 1.2rem 1.2rem; }
+    table.gods tr.god td{ padding:0.2rem 0; }
+    td.name{ width:100%; }
+    table.gods tr.group td{ padding:0.7rem 1.2rem; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .page-hero .cloud-layer{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">ARCADIA SKY <small>古代ギリシャ史ノート</small></a>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html" class="current">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="cloud-layer">
+    <svg viewBox="0 0 1600 220" preserveAspectRatio="none">
+      <path fill="#FDFCF7" d="M0,170 Q80,120 180,150 Q230,100 320,130 Q390,90 470,125 Q550,95 630,135 Q710,100 800,140 Q880,105 970,140 Q1050,105 1140,140 Q1220,110 1300,145 Q1390,115 1470,150 Q1540,130 1600,150 L1600,220 L0,220 Z"/>
+    </svg>
+  </div>
+  <div class="page-hero-copy">
+    <span class="eyebrow">Special Report</span>
+    <h1>ギリシャ神話の神一覧</h1>
+  </div>
+</section>
+
+<div class="column-divider">
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+  <svg viewBox="0 0 20 40"><rect x="7" y="0" width="6" height="34" fill="#3E5B6B"/><rect x="4" y="34" width="12" height="6" fill="#3E5B6B"/><rect x="4" y="0" width="12" height="4" fill="#3E5B6B"/></svg>
+</div>
+
+<div class="report-wrap">
+  <a href="gallery.html" class="back-link">← Galleryへ戻る</a>
+
+  <div class="report-intro">
+    <div class="label">Gods of Hellas</div>
+    <p>世界のはじまりの神々から、オリュンポスの神々、冥界の神々まで、ギリシャ神話によく登場する神をまとめました。</p>
+    <p class="note">神話は地域や時代、作者によって話が異なります。ここでは代表的な伝承を紹介しています。</p>
+  </div>
+
+  <table class="gods">
+    <thead>
+      <tr>
+        <th>神の名前</th>
+        <th>解説</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- 原初の神々・ティタン神族 -->
+      <tr class="group"><td colspan="2">原初の神々・ティタン神族<span class="en">Primordial &amp; Titans</span></td></tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">カオス</span><span class="roman">Chaos</span></td>
+        <td>世界のはじまりに最初に生まれたとされる存在。「大きな裂け目」や「空虚」を意味し、そこからガイアなどの神々が現れたと語られる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ガイア</span><span class="roman">Gaia</span></td>
+        <td>大地の女神。天空神ウラノスや海の神ポントスを生み、ティタン神族の母となった。万物を生み出す大地そのものの象徴。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ウラノス</span><span class="roman">Uranus</span></td>
+        <td>天空の神。ガイアの子であり夫でもある。子どもたちを大地の奥に閉じ込めたため、息子のクロノスに倒された。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">クロノス</span><span class="roman">Cronus</span></td>
+        <td>ティタン神族の王。父ウラノスを倒して世界の支配者となったが、「子に倒される」と予言され、生まれた子を次々と飲み込んだ。のちに息子ゼウスに敗れた。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">レア</span><span class="roman">Rhea</span></td>
+        <td>クロノスの妻で、ゼウスたちの母。ゼウスが生まれたとき、産着で包んだ石をクロノスに飲ませ、ゼウスを隠して守った。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">プロメテウス</span><span class="roman">Prometheus</span></td>
+        <td>ティタン神族の一柱。人間のために天から火を盗んで与えたことでゼウスの怒りを買い、罰を受けた。人間の味方として知られる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ヘリオス</span><span class="roman">Helios</span></td>
+        <td>太陽の神。毎日、四頭立ての馬車で東から西へ空を駆けると語られる。のちにアポロンと結びつけて語られることもあった。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">セレネ</span><span class="roman">Selene</span></td>
+        <td>月の女神。夜空に月の馬車を走らせる。のちにアルテミスと同一視されることもあった。</td>
+      </tr>
+
+      <!-- オリュンポスの神々 -->
+      <tr class="group"><td colspan="2">オリュンポスの神々<span class="en">The Olympians</span></td></tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ゼウス</span><span class="roman">Zeus</span></td>
+        <td>天空と雷を司る神々の王。父クロノスを倒してオリュンポスの主神となった。人間界の秩序や正義を守る神としても崇められた。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ヘラ</span><span class="roman">Hera</span></td>
+        <td>ゼウスの妻で、結婚と家庭を守る女神。神々の女王だが、ゼウスの浮気に嫉妬する姿が神話にたびたび描かれる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ポセイドン</span><span class="roman">Poseidon</span></td>
+        <td>海と地震、馬を司る神。ゼウスの兄で、三叉の矛を持つ。海の民であるギリシャ人にとって特に重要な神だった。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">デメテル</span><span class="roman">Demeter</span></td>
+        <td>農耕と穀物の女神。娘ペルセポネが冥界に連れ去られて嘆き悲しんだ話が、季節が移り変わる由来として語られる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">アテナ</span><span class="roman">Athena</span></td>
+        <td>知恵と戦いの女神。ゼウスの頭から生まれたと伝わる。アテナイの守護神で、パルテノン神殿は彼女に捧げられた。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">アポロン</span><span class="roman">Apollo</span></td>
+        <td>光、音楽、予言、医術などを司る神。デルフォイの神託はアポロンの言葉を伝えるものとされた。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">アルテミス</span><span class="roman">Artemis</span></td>
+        <td>狩猟と野生動物、月の女神。アポロンの双子の姉にあたる。純潔を守る女神として、弓矢を持つ姿で描かれる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">アレス</span><span class="roman">Ares</span></td>
+        <td>戦争の神。荒々しい戦闘の側面を表し、知略を重んじるアテナと対比される。ギリシャ人にはあまり好まれなかったともいわれる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">アフロディテ</span><span class="roman">Aphrodite</span></td>
+        <td>愛と美の女神。海の泡から生まれたと語られる。トロイア戦争のきっかけとなる「パリスの審判」にも関わった。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ヘパイストス</span><span class="roman">Hephaestus</span></td>
+        <td>鍛冶と火の神。神々の武器や道具を作る職人で、ゼウスの雷霆なども作ったとされる。神々のなかで数少ない働き者として描かれる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ヘルメス</span><span class="roman">Hermes</span></td>
+        <td>神々の使者で、旅人・商人・盗人の守護神。翼のついた靴と杖を持ち、冥界へ死者を導く役目も担った。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ディオニュソス</span><span class="roman">Dionysus</span></td>
+        <td>ぶどう酒と豊穣、演劇の神。アテナイでは彼を祝う祭りで悲劇や喜劇が上演され、ギリシャ演劇の発展につながった。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ヘスティア</span><span class="roman">Hestia</span></td>
+        <td>かまどの女神。家庭の火と団らんを守る。あまり事件を起こさない穏やかな神として知られる。</td>
+      </tr>
+
+      <!-- 冥界の神々 -->
+      <tr class="group"><td colspan="2">冥界・死と眠りの神々<span class="en">The Underworld</span></td></tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ハデス</span><span class="roman">Hades</span></td>
+        <td>冥界の王。ゼウスとポセイドンの兄弟。死者の国を治め、地上の神々とは距離を置いていた。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ペルセポネ</span><span class="roman">Persephone</span></td>
+        <td>デメテルの娘で、ハデスの妻となった冥界の女王。一年の一部を冥界で、残りを地上で過ごすとされ、季節の由来になった。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ヒュプノス</span><span class="roman">Hypnos</span></td>
+        <td>眠りの神。夜の女神ニュクスの子で、死の神タナトスとは兄弟とされる。ゼウスですら眠らせる力を持つと語られる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">タナトス</span><span class="roman">Thanatos</span></td>
+        <td>死そのものを神格化した神。夜の女神ニュクスの子で、静かに人間のもとを訪れて命を連れていく。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ヘカテ</span><span class="roman">Hecate</span></td>
+        <td>魔術、夜、分かれ道の女神。松明を持つ姿で表され、ペルセポネが冥界へ連れ去られたときにデメテルを助けたと伝わる。</td>
+      </tr>
+
+      <!-- その他の神々 -->
+      <tr class="group"><td colspan="2">その他の神々<span class="en">Other Deities</span></td></tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">エロス</span><span class="roman">Eros</span></td>
+        <td>愛と欲望の神。弓矢で射られた者は恋に落ちる。アフロディテの子とされる話が有名だが、世界のはじまりから存在した神とする伝承もある。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ニケ</span><span class="roman">Nike</span></td>
+        <td>勝利の女神。翼を広げた姿で表されることが多く、戦争や競技の勝者を祝福する。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">パン</span><span class="roman">Pan</span></td>
+        <td>牧人と家畜、野山の神。山羊の脚と角をもつ姿で、笛を吹く。突然の恐怖「パニック」の語源とされる。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ネメシス</span><span class="roman">Nemesis</span></td>
+        <td>神罰と復讐の女神。人間の思い上がりや傲慢に報いを与える存在として、公正なバランスを保つ役割を担った。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">イリス</span><span class="roman">Iris</span></td>
+        <td>虹の女神で、神々の使者。虹の橋を渡って天と地の間を行き来し、とくにヘラの使いとして活躍する。</td>
+      </tr>
+
+      <tr class="god">
+        <td class="name"><span class="person">ムーサ（ミューズ）</span><span class="roman">Muses</span></td>
+        <td>芸術と学問を司る9人の女神たち。詩、音楽、舞踏、歴史などをそれぞれ受け持ち、詩人たちは作品を作る前に彼女たちへ祈った。「ミュージアム」の語源でもある。</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <a href="index.html" class="brand">ARCADIA SKY</a>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <p class="ai-notice">本サイトのすべてのテキストおよび画像は、AIモデルの学習目的での使用・収集・複製を禁じます。No content on this site may be used for AI training purposes.</p>
+  <p class="copyright">© Arcadia Sky — Notes on Ancient Hellas</p>
+</footer>
+
+</body>
+</html>
